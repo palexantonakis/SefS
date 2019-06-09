@@ -27,4 +27,3 @@ To get started you need to generate a Mapbox ID. Get your ID by creating a Mapbo
 
 # SefS
 # SefS
-# SefS
