@@ -22,7 +22,7 @@ map.addControl(new mapboxgl.ScaleControl({
 }));
 
 // geolocate control
-map.addControl(new mapboxgl.GeolocateControl());
+//map.addControl(new mapboxgl.GeolocateControl());
 
 //This overides the Bootstrap modal "enforceFocus" to allow user interaction with main map
 $.fn.modal.Constructor.prototype.enforceFocus = function () { };
@@ -125,147 +125,164 @@ var emptyGJ = {
 
 map.on('load', function () {
 
-    //monster layers
-    //Mr. Claw layer sources
-    map.addSource('monster', { type: 'geojson', data: emptyGJ });
-    map.addSource('mouth', { type: 'geojson', data: emptyGJ });
-    map.addSource('water-line', { type: 'geojson', data: emptyGJ });
-    map.addSource('eyes', { type: 'geojson', data: emptyGJ });
-
+    map.addSource('Sentinel', { type: 'geojson', data: emptyGJ });
     map.addLayer({
-        "id": "monster",
-        "type": "fill",
-        "source": "monster",
-        "layout": {
-           //"visibility": 'none'
-        },
-        "paint": {
-            'fill-color': '#b30000',
-            'fill-opacity': 1.0
-        }
-    });
-
-    map.addLayer({
-        "id": "mouth",
-        "type": "fill",
-        "source": "mouth",
-        "layout": {
-            //"visibility": 'none'
-        },
-        "paint": {
-            'fill-color': 'white',
-            'fill-opacity': 1.0
-        }
-    });
-
-    map.addLayer({
-        "id": "water-line",
-        "type": "line",
-        "source": "water-line",
-        "layout": {
-           // "visibility": 'none'
-        },
-        "paint": {
-            'line-color': '#0099ff',
-            'line-opacity': 1.0,
-            "line-width": 9,
-        },
-    });
-
-    map.addLayer({
-        "id": "eyes",
+        "id": "Sentinel",
         "type": "circle",
-        "source": "eyes",
+        "source": "Sentinel",
         "layout": {
-            //"visibility": 'none'
+            "visibility": 'none'
         },
         "paint": {
-            'circle-color': 'white',
+            'circle-color': '#ff8c1a',
             'circle-opacity': 1.0,
             'circle-stroke-color': 'black',
-            'circle-stroke-width': 3,
+            'circle-stroke-width': 1,
             'circle-stroke-opacity': 1.0,
         }
     });
+
+    //monster layers
+    //Mr. Claw layer sources
+    // map.addSource('monster', { type: 'geojson', data: emptyGJ });
+    // map.addSource('mouth', { type: 'geojson', data: emptyGJ });
+    // map.addSource('water-line', { type: 'geojson', data: emptyGJ });
+    // map.addSource('eyes', { type: 'geojson', data: emptyGJ });
+
+    // map.addLayer({
+    //     "id": "monster",
+    //     "type": "fill",
+    //     "source": "monster",
+    //     "layout": {
+    //        //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': '#b30000',
+    //         'fill-opacity': 1.0
+    //     }
+    // });
+
+    // map.addLayer({
+    //     "id": "mouth",
+    //     "type": "fill",
+    //     "source": "mouth",
+    //     "layout": {
+    //         //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': 'white',
+    //         'fill-opacity': 1.0
+    //     }
+    // });
+
+    // map.addLayer({
+    //     "id": "water-line",
+    //     "type": "line",
+    //     "source": "water-line",
+    //     "layout": {
+    //        // "visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'line-color': '#0099ff',
+    //         'line-opacity': 1.0,
+    //         "line-width": 9,
+    //     },
+    // });
+
+    // map.addLayer({
+    //     "id": "eyes",
+    //     "type": "circle",
+    //     "source": "eyes",
+    //     "layout": {
+    //         //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'circle-color': 'white',
+    //         'circle-opacity': 1.0,
+    //         'circle-stroke-color': 'black',
+    //         'circle-stroke-width': 3,
+    //         'circle-stroke-opacity': 1.0,
+    //     }
+    // });
 
     //monster layers
     //Mr. Octo layer sources
-    map.addSource('octo', { type: 'geojson', data: emptyGJ });
-    map.addSource('water-line-2', { type: 'geojson', data: emptyGJ });
-    map.addSource('mouth2', { type: 'geojson', data: emptyGJ });
-    map.addSource('eyes2', { type: 'geojson', data: emptyGJ });
+    // map.addSource('octo', { type: 'geojson', data: emptyGJ });
+    // map.addSource('water-line-2', { type: 'geojson', data: emptyGJ });
+    // map.addSource('mouth2', { type: 'geojson', data: emptyGJ });
+    // map.addSource('eyes2', { type: 'geojson', data: emptyGJ });
 
-    map.addLayer({
-        "id": "octo",
-        "type": "fill",
-        "source": "octo",
-        "layout": {
-            //"visibility": 'none'
-        },
-        "paint": {
-            'fill-color': 'black',
-            'fill-opacity': 1.0
-        }
-    });
+    // map.addLayer({
+    //     "id": "octo",
+    //     "type": "fill",
+    //     "source": "octo",
+    //     "layout": {
+    //         //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': 'black',
+    //         'fill-opacity': 1.0
+    //     }
+    // });
 
-    map.addLayer({
-        "id": "water-line-2",
-        "type": "line",
-        "source": "water-line-2",
-        "layout": {
-            // "visibility": 'none'
-        },
-        "paint": {
-            'line-color': '#0099ff',
-            'line-opacity': 1.0,
-            "line-width": 9,
-        },
-    });
-    map.addLayer({
-        "id": "mouth2",
-        "type": "fill",
-        "source": "mouth2",
-        "layout": {
-            //"visibility": 'none'
-        },
-        "paint": {
-            'fill-color': 'white',
-            'fill-opacity': 1.0
-        }
-    });
+    // map.addLayer({
+    //     "id": "water-line-2",
+    //     "type": "line",
+    //     "source": "water-line-2",
+    //     "layout": {
+    //         // "visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'line-color': '#0099ff',
+    //         'line-opacity': 1.0,
+    //         "line-width": 9,
+    //     },
+    // });
+    // map.addLayer({
+    //     "id": "mouth2",
+    //     "type": "fill",
+    //     "source": "mouth2",
+    //     "layout": {
+    //         //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': 'white',
+    //         'fill-opacity': 1.0
+    //     }
+    // });
 
-    map.addLayer({
-        "id": "eyes2",
-        "type": "circle",
-        "source": "eyes2",
-        "layout": {
-            //"visibility": 'none'
-        },
-        "paint": {
-            'circle-color': 'red',
-            'circle-opacity': 1.0,
-            'circle-stroke-color': 'lightblue',
-            'circle-stroke-width': 4,
-            'circle-stroke-opacity': 1.0,
-        }
-    });
+    // map.addLayer({
+    //     "id": "eyes2",
+    //     "type": "circle",
+    //     "source": "eyes2",
+    //     "layout": {
+    //         //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'circle-color': 'red',
+    //         'circle-opacity': 1.0,
+    //         'circle-stroke-color': 'lightblue',
+    //         'circle-stroke-width': 4,
+    //         'circle-stroke-opacity': 1.0,
+    //     }
+    // });
 
     //cultural layers
     //cultural layers
-    map.addSource('country', { type: 'geojson', data: emptyGJ });
-    map.addLayer({
-        "id": "country",
-        "type": "fill",
-        "source": "country",
-        "layout": {
-           //"visibility": 'none'
-        },
-        "paint": {
-            'fill-color': '#595959',
-            'fill-opacity': .5,
-            'fill-outline-color': '#333333',
-        }
-    });
+    // map.addSource('country', { type: 'geojson', data: emptyGJ });
+    // map.addLayer({
+    //     "id": "country",
+    //     "type": "fill",
+    //     "source": "country",
+    //     "layout": {
+    //        //"visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': '#595959',
+    //         'fill-opacity': .5,
+    //         'fill-outline-color': '#333333',
+    //     }
+    // });
 
 
     map.addSource('populated', { type: 'geojson', data: emptyGJ });
@@ -288,35 +305,35 @@ map.on('load', function () {
 
     //physical layers
     //physical layers
-    map.addSource('ocean', { type: 'geojson', data: emptyGJ });
-    map.addLayer({
-        "id": "ocean",
-        "type": "fill",
-        "source": "ocean",
-        "layout": {
-            "visibility": 'none'
-        },
-        "paint": {
-            'fill-color': '#00334d',
-            'fill-opacity': 0.5,
-            'fill-outline-color': '#00111a',
-        }
-    });
+    // map.addSource('ocean', { type: 'geojson', data: emptyGJ });
+    // map.addLayer({
+    //     "id": "ocean",
+    //     "type": "fill",
+    //     "source": "ocean",
+    //     "layout": {
+    //         "visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'fill-color': '#00334d',
+    //         'fill-opacity': 0.5,
+    //         'fill-outline-color': '#00111a',
+    //     }
+    // });
 
-    map.addSource('river', { type: 'geojson', data: emptyGJ });
-    map.addLayer({
-        "id": "river",
-        "type": "line",
-        "source": "river",
-        "layout": {
-            "visibility": 'none'
-        },
-        "paint": {
-            'line-color': '#0099cc',
-            'line-opacity': .8,
-            "line-width": 4,
-        },
-    });
+    // map.addSource('river', { type: 'geojson', data: emptyGJ });
+    // map.addLayer({
+    //     "id": "river",
+    //     "type": "line",
+    //     "source": "river",
+    //     "layout": {
+    //         "visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'line-color': '#0099cc',
+    //         'line-opacity': .8,
+    //         "line-width": 4,
+    //     },
+    // });
 
     //Layer Info function
     //Layer Info function
@@ -350,87 +367,114 @@ map.on('load', function () {
                   '<hr>'
         }
 
-        if (map.queryRenderedFeatures(e.point, { layers: ['country'] }).length) {
+        if (map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] }).length) {
 
-            feature = map.queryRenderedFeatures(e.point, { layers: ['country'] })[0];
-
-            append.innerHTML +=
-              '<h5>Country</h5>' +
-              '<hr>' +
-              '<b>Port Name </b>' + feature.properties.admin +
-              '<hr>' +
-              '<b>Code: </b>' + feature.properties.adm0_a3 +
-              '<hr>'
-        }
-
-        //Monster - Layer Info
-        //Monster - Layer Info
-        if (map.queryRenderedFeatures(e.point, { layers: ['monster'] }).length) {
-
-            feature = map.queryRenderedFeatures(e.point, { layers: ['monster'] })[0];
+            feature = map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] })[0];
 
             append.innerHTML +=
-                  '<h5>Monster Info</h5>' +
+                  '<h5>Info</h5>' +
                   '<hr>' +
-                  '<b>Name: </b>' + 'Mr. Claw'+
+                  '<b>Width: </b>' + feature.properties.Width +
                   '<hr>' +
-                  '<b>Place of Birth: </b>' + 'Atlantic Ocean' +
+                  '<b>Length: </b>' + feature.properties.Length +
                   '<hr>' +
-                  '<b>Likes: </b>' + 'Birthday Parties' +
+                  '<b>Latitude: </b>' + feature.properties.Latitude +
                   '<hr>' +
-                  '<b>Dislikes: </b>' + 'Seafood Festivals' +
+                  '<b>Longitude: </b>' + feature.properties.Longitude +
+                  '<hr>' +
+                  '<b>Datetime: </b>' + feature.properties.Datetime   +
+                  '<hr>' +
+                  '<hr>' +
+                  '<b>Relative_O: </b>' + feature.properties.Relative_O +
+                  '<hr>' +
+                  '<b>Sensor: </b>' + feature.properties.Sensor +
+                  '<hr>' +
+                  '<b>Polarizati: </b>' + feature.properties.Polarizati +
                   '<hr>'
         }
 
+        // if (map.queryRenderedFeatures(e.point, { layers: ['country'] }).length) {
+
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['country'] })[0];
+
+        //     append.innerHTML +=
+        //       '<h5>Country</h5>' +
+        //       '<hr>' +
+        //       '<b>Port Name </b>' + feature.properties.admin +
+        //       '<hr>' +
+        //       '<b>Code: </b>' + feature.properties.adm0_a3 +
+        //       '<hr>'
+        // }
+
         //Monster - Layer Info
         //Monster - Layer Info
-        if (map.queryRenderedFeatures(e.point, { layers: ['octo'] }).length) {
+        // if (map.queryRenderedFeatures(e.point, { layers: ['monster'] }).length) {
 
-            feature = map.queryRenderedFeatures(e.point, { layers: ['octo'] })[0];
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['monster'] })[0];
 
-            append.innerHTML +=
-                  '<h5>Monster Info</h5>' +
-                  '<hr>' +
-                  '<b>Name: </b>' + 'Mr. Octo' +
-                  '<hr>' +
-                  '<b>Place of Birth: </b>' + 'Pacific Ocean' +
-                  '<hr>' +
-                  '<b>Likes: </b>' + 'Big Salads' +
-                  '<hr>' +
-                  '<b>Dislikes: </b>' + 'Jules Verne' +
-                  '<hr>'
-        }
+        //     append.innerHTML +=
+        //           '<h5>Monster Info</h5>' +
+        //           '<hr>' +
+        //           '<b>Name: </b>' + 'Mr. Claw'+
+        //           '<hr>' +
+        //           '<b>Place of Birth: </b>' + 'Atlantic Ocean' +
+        //           '<hr>' +
+        //           '<b>Likes: </b>' + 'Birthday Parties' +
+        //           '<hr>' +
+        //           '<b>Dislikes: </b>' + 'Seafood Festivals' +
+        //           '<hr>'
+        // }
+
+        //Monster - Layer Info
+        //Monster - Layer Info
+        // if (map.queryRenderedFeatures(e.point, { layers: ['octo'] }).length) {
+
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['octo'] })[0];
+
+        //     append.innerHTML +=
+        //           '<h5>Monster Info</h5>' +
+        //           '<hr>' +
+        //           '<b>Name: </b>' + 'Mr. Octo' +
+        //           '<hr>' +
+        //           '<b>Place of Birth: </b>' + 'Pacific Ocean' +
+        //           '<hr>' +
+        //           '<b>Likes: </b>' + 'Big Salads' +
+        //           '<hr>' +
+        //           '<b>Dislikes: </b>' + 'Jules Verne' +
+        //           '<hr>'
+        // }
 
 
         //Physical - Layer Info
         //Physical  - Layer Info
-        if (map.queryRenderedFeatures(e.point, { layers: ['ocean'] }).length) {
+        // if (map.queryRenderedFeatures(e.point, { layers: ['ocean'] }).length) {
 
-            feature = map.queryRenderedFeatures(e.point, { layers: ['ocean'] })[0];
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['ocean'] })[0];
 
-            append.innerHTML +=
-                  '<h5>Oceans</h5>' +
-                  '<hr>' +
-                  '<b>Name: </b>' + feature.properties.name +
-                  '<hr>'
-        }
+        //     append.innerHTML +=
+        //           '<h5>Oceans</h5>' +
+        //           '<hr>' +
+        //           '<b>Name: </b>' + feature.properties.name +
+        //           '<hr>'
+        // }
 
-        if (map.queryRenderedFeatures(e.point, { layers: ['river'] }).length) {
+        // if (map.queryRenderedFeatures(e.point, { layers: ['river'] }).length) {
 
-            feature = map.queryRenderedFeatures(e.point, { layers: ['river'] })[0];
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['river'] })[0];
 
-            append.innerHTML +=
-                  '<h5>Major Rivers</h5>' +
-                  '<hr>' +
-                  '<b>Name: </b>' + feature.properties.name +
-                  '<hr>'
-        }
+        //     append.innerHTML +=
+        //           '<h5>Major Rivers</h5>' +
+        //           '<hr>' +
+        //           '<b>Name: </b>' + feature.properties.name +
+        //           '<hr>'
+        // }
     });
 
     //cursor = pointer on hover configuration
     map.on('mousemove', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
-            layers: ['ocean', 'river', 'country', 'populated', 'monster', 'octo']
+        //    layers: ['ocean', 'river', 'country', 'populated', 'monster', 'octo']
+            layers: ['populated','Sentinel']
         });
         map.getCanvas().style.cursor = (features.length) ? 'default' : '';
     });
@@ -463,122 +507,145 @@ map.on('load', function () {
     });
 
     map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["country"] });
+        var features = map.queryRenderedFeatures(e.point, { layers: ["Sentinel"] });
 
-        if (map.getLayer("country_hl")) {
-            map.removeLayer("country_hl");
+        if (map.getLayer("Sentinel_hl")) {
+            map.removeLayer("Sentinel_hl");
         }
 
         if (features.length) {
 
             map.addLayer({
-                "id": "country_hl",
-                "type": "line",
-                "source": "country",
+                "id": "Sentinel_hl",
+                "type": "circle",
+                "source": "Sentinel",
                 "layout": {},
                 "paint": {
-                    "line-color": "cyan",
-                    "line-width": 3
+                    "circle-color": "cyan",
+                    "circle-radius": 7
                 },
-                "filter": ["==", "sovereignt", features[0].properties.sovereignt],
+                "filter": ["==", "Latitude", features[0].properties.Latitude],
             });
         }
     });
+
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["country"] });
+
+    //     if (map.getLayer("country_hl")) {
+    //         map.removeLayer("country_hl");
+    //     }
+
+    //     if (features.length) {
+
+    //         map.addLayer({
+    //             "id": "country_hl",
+    //             "type": "line",
+    //             "source": "country",
+    //             "layout": {},
+    //             "paint": {
+    //                 "line-color": "cyan",
+    //                 "line-width": 3
+    //             },
+    //             "filter": ["==", "sovereignt", features[0].properties.sovereignt],
+    //         });
+    //     }
+    // });
 
     //Highlight - Mr. Claw
-    map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["monster"] });
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["monster"] });
 
-        if (map.getLayer("monster_hl")) {
-            map.removeLayer("monster_hl");
-        }
+    //     if (map.getLayer("monster_hl")) {
+    //         map.removeLayer("monster_hl");
+    //     }
 
-        if (features.length) {
+    //     if (features.length) {
 
-            map.addLayer({
-                "id": "monster_hl",
-                "type": "line",
-                "source": "monster",
-                "layout": {},
-                "paint": {
-                    "line-color": "cyan",
-                    "line-width": 3
-                },
-                "filter": ["==", "Id", features[0].properties.Id],
-            });
-        }
-    });
+    //         map.addLayer({
+    //             "id": "monster_hl",
+    //             "type": "line",
+    //             "source": "monster",
+    //             "layout": {},
+    //             "paint": {
+    //                 "line-color": "cyan",
+    //                 "line-width": 3
+    //             },
+    //             "filter": ["==", "Id", features[0].properties.Id],
+    //         });
+    //     }
+    // });
 
     //Highlight - Mr. Octo
-    map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["octo"] });
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["octo"] });
 
-        if (map.getLayer("octo_hl")) {
-            map.removeLayer("octo_hl");
-        }
+    //     if (map.getLayer("octo_hl")) {
+    //         map.removeLayer("octo_hl");
+    //     }
 
-        if (features.length) {
+    //     if (features.length) {
 
-            map.addLayer({
-                "id": "octo_hl",
-                "type": "line",
-                "source": "octo",
-                "layout": {},
-                "paint": {
-                    "line-color": "cyan",
-                    "line-width": 3
-                },
-                "filter": ["==", "Id", features[0].properties.Id],
-            });
-        }
-    });
+    //         map.addLayer({
+    //             "id": "octo_hl",
+    //             "type": "line",
+    //             "source": "octo",
+    //             "layout": {},
+    //             "paint": {
+    //                 "line-color": "cyan",
+    //                 "line-width": 3
+    //             },
+    //             "filter": ["==", "Id", features[0].properties.Id],
+    //         });
+    //     }
+    // });
 
     //Highlight - Physical
-    map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["river"] });
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["river"] });
 
-        if (map.getLayer("river_hl")) {
-            map.removeLayer("river_hl");
-        }
+    //     if (map.getLayer("river_hl")) {
+    //         map.removeLayer("river_hl");
+    //     }
 
-        if (features.length) {
+    //     if (features.length) {
 
-            map.addLayer({
-                "id": "river_hl",
-                "type": "line",
-                "source": "river",
-                "layout": {},
-                "paint": {
-                    "line-color": "cyan",
-                    "line-width": 4
-                },
-                "filter": ["==", "name", features[0].properties.name],
-            });
-        }
-    });
+    //         map.addLayer({
+    //             "id": "river_hl",
+    //             "type": "line",
+    //             "source": "river",
+    //             "layout": {},
+    //             "paint": {
+    //                 "line-color": "cyan",
+    //                 "line-width": 4
+    //             },
+    //             "filter": ["==", "name", features[0].properties.name],
+    //         });
+    //     }
+    // });
 
-    map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["ocean"] });
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["ocean"] });
 
-        if (map.getLayer("ocean_hl")) {
-            map.removeLayer("ocean_hl");
-        }
+    //     if (map.getLayer("ocean_hl")) {
+    //         map.removeLayer("ocean_hl");
+    //     }
 
-        if (features.length) {
+    //     if (features.length) {
 
-            map.addLayer({
-                "id": "ocean_hl",
-                "type": "line",
-                "source": "ocean",
-                "layout": {},
-                "paint": {
-                    "line-color": "cyan",
-                    "line-width": 3
-                },
-                "filter": ["==", "name", features[0].properties.name],
-            });
-        }
-    });
+    //         map.addLayer({
+    //             "id": "ocean_hl",
+    //             "type": "line",
+    //             "source": "ocean",
+    //             "layout": {},
+    //             "paint": {
+    //                 "line-color": "cyan",
+    //                 "line-width": 3
+    //             },
+    //             "filter": ["==", "name", features[0].properties.name],
+    //         });
+    //     }
+    // });
 });
 
 // Directory Options
@@ -605,78 +672,85 @@ var directoryOptions =
 var layers =
 
 [
-    // Mr Claw LAYER TREE CONFIG
-    // Mr Claw LAYER TREE CONFIG
     {
-        'name': 'Mr Claw',
-        'id': 'monster_group',
-        'hideLabel': ['mouth', 'water-line', 'eyes', 'monster'],
-        'icon': 'assets/images/layer-stack-15.svg',
-        'layerGroup': [
-            {
-                'id': 'monster',
-                'source': 'monster',
-                'name': 'Mr. Claw',
-                'path': 'assets/json/monster.json',
-            },
-            {
-                'id': 'mouth',
-                'source': 'mouth',
-                'name': 'Mouth',
-                'path': 'assets/json/mouth.json',
-            },
-            {
-                'id': 'water-line',
-                'source': 'water-line',
-                'name': 'Water',
-                'path': 'assets/json/water.json',
-            },
-            {
-                'id': 'eyes',
-                'source': 'eyes',
-                'name': 'Eyes',
-                'path': 'assets/json/eyes.json',
-            },
-
-        ],
-        'directory': 'Monsters'
+        'name': 'Sentinel',
+        'id': 'Sentinel',
+        'source': "Sentinel",
+        'path': 'assets/json/detections.json',
+        'directory': 'Ship Detections',
     },
+    // // Mr Claw LAYER TREE CONFIG
+    // // Mr Claw LAYER TREE CONFIG
+    // {
+    //     'name': 'Mr Claw',
+    //     'id': 'monster_group',
+    //     'hideLabel': ['mouth', 'water-line', 'eyes', 'monster'],
+    //     'icon': 'assets/images/layer-stack-15.svg',
+    //     'layerGroup': [
+    //         {
+    //             'id': 'monster',
+    //             'source': 'monster',
+    //             'name': 'Mr. Claw',
+    //             'path': 'assets/json/monster.json',
+    //         },
+    //         {
+    //             'id': 'mouth',
+    //             'source': 'mouth',
+    //             'name': 'Mouth',
+    //             'path': 'assets/json/mouth.json',
+    //         },
+    //         {
+    //             'id': 'water-line',
+    //             'source': 'water-line',
+    //             'name': 'Water',
+    //             'path': 'assets/json/water.json',
+    //         },
+    //         {
+    //             'id': 'eyes',
+    //             'source': 'eyes',
+    //             'name': 'Eyes',
+    //             'path': 'assets/json/eyes.json',
+    //         },
 
-    // Mr Octo LAYER TREE CONFIG
-    // Mr Octo LAYER TREE CONFIG
-    {
-        'name': 'Mr. Octo',
-        'id': 'monster_group_2',
-        'hideLabel': ['octo', 'water-line-2', 'eyes2', 'mouth2'],
-        'icon': 'assets/images/layer-stack-15.svg',
-        'layerGroup': [
-            {
-                'id': 'octo',
-                'source': 'octo',
-                'name': 'Mr. Octo',
-                'path': 'assets/json/octo.json',
-            },
-            {
-                'id': 'water-line-2',
-                'source': 'water-line-2',
-                'name': 'Water',
-                'path': 'assets/json/water2.json',
-            },
-            {
-                'id': 'mouth2',
-                'source': 'mouth2',
-                'name': 'Mouth',
-                'path': 'assets/json/mouth2.json',
-            },
-            {
-                'id': 'eyes2',
-                'source': 'eyes2',
-                'name': 'Eyes',
-                'path': 'assets/json/eyes2.json',
-            },
-        ],
-        'directory': 'Monsters'
-    },
+    //     ],
+    //     'directory': 'Monsters'
+    // },
+
+    // // Mr Octo LAYER TREE CONFIG
+    // // Mr Octo LAYER TREE CONFIG
+    // {
+    //     'name': 'Mr. Octo',
+    //     'id': 'monster_group_2',
+    //     'hideLabel': ['octo', 'water-line-2', 'eyes2', 'mouth2'],
+    //     'icon': 'assets/images/layer-stack-15.svg',
+    //     'layerGroup': [
+    //         {
+    //             'id': 'octo',
+    //             'source': 'octo',
+    //             'name': 'Mr. Octo',
+    //             'path': 'assets/json/octo.json',
+    //         },
+    //         {
+    //             'id': 'water-line-2',
+    //             'source': 'water-line-2',
+    //             'name': 'Water',
+    //             'path': 'assets/json/water2.json',
+    //         },
+    //         {
+    //             'id': 'mouth2',
+    //             'source': 'mouth2',
+    //             'name': 'Mouth',
+    //             'path': 'assets/json/mouth2.json',
+    //         },
+    //         {
+    //             'id': 'eyes2',
+    //             'source': 'eyes2',
+    //             'name': 'Eyes',
+    //             'path': 'assets/json/eyes2.json',
+    //         },
+    //     ],
+    //     'directory': 'Monsters'
+    // },
 
      // Cultural LAYER TREE CONFIG
      // Cultural LAYER TREE CONFIG
@@ -687,33 +761,33 @@ var layers =
         'source': "populated",
         'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson',
         'directory': 'Cultural',
-    },
-    {
-        'name': 'Countries',
-        'id': 'country',
-        'source': 'country',
-        'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_map_units.geojson',
-        'directory': 'Cultural',
-    },
+    }
+    // {
+    //     'name': 'Countries',
+    //     'id': 'country',
+    //     'source': 'country',
+    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_map_units.geojson',
+    //     'directory': 'Cultural',
+    // },
 
 
     // Physical LAYER TREE CONFIG
     // Physical LAYER TREE CONFIG
 
-    {
-        'name': 'Major Rivers',
-        'id': 'river',
-        'source': 'river',
-        'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_rivers_lake_centerlines.geojson',
-        'directory': 'Physical',
-    },
-    {
-        'name': 'Oceans',
-        'id': 'ocean',
-        'source': 'ocean',
-        'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_geography_marine_polys.geojson',
-        'directory': 'Physical',
-    },
+    // {
+    //     'name': 'Major Rivers',
+    //     'id': 'river',
+    //     'source': 'river',
+    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_rivers_lake_centerlines.geojson',
+    //     'directory': 'Physical',
+    // },
+    // {
+    //     'name': 'Oceans',
+    //     'id': 'ocean',
+    //     'source': 'ocean',
+    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_geography_marine_polys.geojson',
+    //     'directory': 'Physical',
+    // },
 
 ];
 

@@ -1,3 +1,5 @@
+# SefS
+
 Ready Template of PortMap as described below.
 Tryin to modify to become Ship Decection Map
 
@@ -24,7 +26,3 @@ To get started you need to generate a Mapbox ID. Get your ID by creating a Mapbo
 * Scale bar 
 * Not included in this repo: Save Views function allows the user to save Layer Tree configuration, Mapbox drawn features, Text Markups, and Zoom and Pitch. All plugins in this repo have code pre-built to work with the Save Views plugin: [Mapbox-GL-JS-save-view](https://github.com/TheGartrellGroup/Mapbox-GL-JS-save-view)
 
-
-# SefS
-# SefS
-# SefS
