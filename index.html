@@ -61,6 +61,12 @@
     <link href='assets/css/styles-custom.css' rel='stylesheet' />
     <link href='assets/css/text-editor-style.css' rel='stylesheet' />
 
+    <!-- Datepicket JS-->
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <script src="https://unpkg.com/js-datepicker@4.0.10/dist/datepicker.min.js"></script>
+    <!-- Moment JS-->
+    <script src="https://unpkg.com/moment"></script>
+
     <style>
         #map {
             position: absolute;
@@ -88,6 +94,12 @@
             -moz-box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
             -webkit-box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.1);
+        }
+
+        #datepicker {
+            height: 20px;
+            width: 150px; 
+            margin: 0 0 10px 10px;   
         }
     </style>
 
@@ -216,20 +228,16 @@
         <!-- Layer List Modal -->
         <div class="modal left fade" id="layersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-fw fa-list"></i>&nbsp;Layers</h4>
                     </div>
-
                     <div class="modal-body">
-
                         <div id="menu"></div>
-
                     </div>
-
+                    &nbsp;  Pick an available date
+                    <input id="datepicker" type="text"></input>
                 </div>
             </div>
         </div>

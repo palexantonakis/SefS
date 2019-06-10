@@ -68,40 +68,40 @@ $('#clear_general').on('click', function (e) {
 // Geocoder API
 // Geocoder API
 // Geocoder API
-var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken
-});
+// var geocoder = new MapboxGeocoder({
+//     accessToken: mapboxgl.accessToken
+// });
 
-var addressTool = document.getElementById('addressAppend');
-addressTool.appendChild(geocoder.onAdd(map))
+// var addressTool = document.getElementById('addressAppend');
+// addressTool.appendChild(geocoder.onAdd(map))
 
-map.on('load', function () {
-    map.addSource('geocode-point', {
-        "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": []
-        }
-    });
+// map.on('load', function () {
+//     map.addSource('geocode-point', {
+//         "type": "geojson",
+//         "data": {
+//             "type": "FeatureCollection",
+//             "features": []
+//         }
+//     });
 
-    map.addLayer({
-        "id": "geocode-point",
-        "source": "geocode-point",
-        "type": "circle",
-        "paint": {
-            "circle-radius": 20,
-            "circle-color": "dodgerblue",
-            'circle-opacity': 0.5,
-            'circle-stroke-color': 'white',
-            'circle-stroke-width': 3,
-        }
-    });
+//     map.addLayer({
+//         "id": "geocode-point",
+//         "source": "geocode-point",
+//         "type": "circle",
+//         "paint": {
+//             "circle-radius": 20,
+//             "circle-color": "dodgerblue",
+//             'circle-opacity': 0.5,
+//             'circle-stroke-color': 'white',
+//             'circle-stroke-width': 3,
+//         }
+//     });
 
-    geocoder.on('result', function (ev) {
-        map.getSource('geocode-point').setData(ev.result.geometry);
-    });
+//     geocoder.on('result', function (ev) {
+//         map.getSource('geocode-point').setData(ev.result.geometry);
+//     });
 
-});
+// });
 
 // Coordinates Tool
 // Coordinates Tool
@@ -131,7 +131,7 @@ map.on('load', function () {
         "type": "circle",
         "source": "Sentinel",
         "layout": {
-            "visibility": 'none'
+            //"visibility": 'none'
         },
         "paint": {
             'circle-color': '#ff8c1a',
@@ -285,22 +285,22 @@ map.on('load', function () {
     // });
 
 
-    map.addSource('populated', { type: 'geojson', data: emptyGJ });
-    map.addLayer({
-        "id": "populated",
-        "type": "circle",
-        "source": "populated",
-        "layout": {
-            "visibility": 'none'
-        },
-        "paint": {
-            'circle-color': 'white',
-            'circle-opacity': 1.0,
-            'circle-stroke-color': '#ff8c1a',
-            'circle-stroke-width': 2,
-            'circle-stroke-opacity': 1.0,
-        }
-    });
+    // map.addSource('populated', { type: 'geojson', data: emptyGJ });
+    // map.addLayer({
+    //     "id": "populated",
+    //     "type": "circle",
+    //     "source": "populated",
+    //     "layout": {
+    //         "visibility": 'none'
+    //     },
+    //     "paint": {
+    //         'circle-color': 'white',
+    //         'circle-opacity': 1.0,
+    //         'circle-stroke-color': '#ff8c1a',
+    //         'circle-stroke-width': 2,
+    //         'circle-stroke-opacity': 1.0,
+    //     }
+    // });
 
 
     //physical layers
@@ -354,18 +354,18 @@ map.on('load', function () {
         //Cultural - Layer Info
         //Cultural - Layer Info
 
-        if (map.queryRenderedFeatures(e.point, { layers: ['populated'] }).length) {
+        // if (map.queryRenderedFeatures(e.point, { layers: ['populated'] }).length) {
 
-            feature = map.queryRenderedFeatures(e.point, { layers: ['populated'] })[0];
+        //     feature = map.queryRenderedFeatures(e.point, { layers: ['populated'] })[0];
 
-            append.innerHTML +=
-                  '<h5>Populated Places</h5>' +
-                  '<hr>' +
-                  '<b>City: </b>' + feature.properties.name +
-                  '<hr>' +
-                  '<b>Country: </b>' + feature.properties.sov0name +
-                  '<hr>'
-        }
+        //     append.innerHTML +=
+        //           '<h5>Populated Places</h5>' +
+        //           '<hr>' +
+        //           '<b>City: </b>' + feature.properties.name +
+        //           '<hr>' +
+        //           '<b>Country: </b>' + feature.properties.sov0name +
+        //           '<hr>'
+        // }
 
         if (map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] }).length) {
 
@@ -474,7 +474,7 @@ map.on('load', function () {
     map.on('mousemove', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
         //    layers: ['ocean', 'river', 'country', 'populated', 'monster', 'octo']
-            layers: ['populated','Sentinel']
+            layers: ['Sentinel']
         });
         map.getCanvas().style.cursor = (features.length) ? 'default' : '';
     });
@@ -483,28 +483,28 @@ map.on('load', function () {
     //Highlight Features Function
     //Highlight Features Function
     //Highlight Features Function
-    map.on(touchEvent, function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["populated"] });
+    // map.on(touchEvent, function (e) {
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ["populated"] });
 
-        if (map.getLayer("populated_hl")) {
-            map.removeLayer("populated_hl");
-        }
+    //     if (map.getLayer("populated_hl")) {
+    //         map.removeLayer("populated_hl");
+    //     }
 
-        if (features.length) {
+    //     if (features.length) {
 
-            map.addLayer({
-                "id": "populated_hl",
-                "type": "circle",
-                "source": "populated",
-                "layout": {},
-                "paint": {
-                    "circle-color": "cyan",
-                    "circle-radius": 7
-                },
-                "filter": ["==", "name", features[0].properties.name],
-            });
-        }
-    });
+    //         map.addLayer({
+    //             "id": "populated_hl",
+    //             "type": "circle",
+    //             "source": "populated",
+    //             "layout": {},
+    //             "paint": {
+    //                 "circle-color": "cyan",
+    //                 "circle-radius": 7
+    //             },
+    //             "filter": ["==", "name", features[0].properties.name],
+    //         });
+    //     }
+    // });
 
     map.on(touchEvent, function (e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ["Sentinel"] });
@@ -528,7 +528,7 @@ map.on('load', function () {
             });
         }
     });
-
+ 
     // map.on(touchEvent, function (e) {
     //     var features = map.queryRenderedFeatures(e.point, { layers: ["country"] });
 
@@ -653,17 +653,21 @@ map.on('load', function () {
 // Directory Options - open or closed by defualt (true/false)
 var directoryOptions =
 [
+    // {
+    //     'name': 'Monsters',
+    //     'open': true
+    // },
+    // {
+    //     'name': 'Cultural',
+    //     'open': true
+    // },
+    // {
+    //     'name': 'Physical',
+    //     'open': true
+    // },
     {
-        'name': 'Monsters',
-        'open': true
-    },
-    {
-        'name': 'Cultural',
-        'open': true
-    },
-    {
-        'name': 'Physical',
-        'open': true
+        'name': 'Ship Detections',
+        'open': true   //defines only if the folder will be initialy open on load and not if the layer is loaded
     },
 
 ];
@@ -755,13 +759,13 @@ var layers =
      // Cultural LAYER TREE CONFIG
      // Cultural LAYER TREE CONFIG
 
-    {
-        'name': 'Populated Places',
-        'id': 'populated',
-        'source': "populated",
-        'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson',
-        'directory': 'Cultural',
-    }
+    // {
+    //     'name': 'Populated Places',
+    //     'id': 'populated',
+    //     'source': "populated",
+    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson',
+    //     'directory': 'Cultural',
+    // }
     // {
     //     'name': 'Countries',
     //     'id': 'country',
@@ -790,6 +794,53 @@ var layers =
     // },
 
 ];
+
+// map.on('load', function (e) {
+//     var feature = map.querySourceFeatures("Sentinel");
+//     console.log(feature);
+// });   save for another try
+let selectedDate
+let sentinelDate
+const picker = datepicker('#datepicker', {alwaysShow: false, maxDate: new Date(2018, 09, 31), minDate: new Date(2018, 09, 1), startDate: new Date(2018, 09, 2),
+    disabledDates:[
+        new Date(2018,09,01), 
+        new Date(2018,09,04), 
+        new Date(2018,09,05), 
+        new Date(2018,09,06), 
+        new Date(2018,09,07),  
+        new Date(2018,09,10),   
+        new Date(2018,09,11), 
+        new Date(2018,09,12), 
+        new Date(2018,09,13), 
+        new Date(2018,09,16), 
+        new Date(2018,09,17), 
+        new Date(2018,09,18), 
+        new Date(2018,09,19), 
+        new Date(2018,09,22), 
+        new Date(2018,09,23), 
+        new Date(2018,09,24), 
+        new Date(2018,09,25), 
+        new Date(2018,09,28), 
+        new Date(2018,09,29), 
+        new Date(2018,09,30), 
+        new Date(2018,09,31),       
+    ],
+    disableYearOverlay: true,
+    onSelect: (instance, date) => {
+        selectedDate = moment(date).format('MM/D/YYYY')
+        console.log(selectedDate)
+        map.on("sourcedata", function(e) {
+            if (map.getSource('Sentinel') && map.isSourceLoaded('Sentinel')) {
+            //    console.log('source loaded!');
+                var features = map.querySourceFeatures('Sentinel') 
+                var filtered = features.filter(function(el){
+                    sentinelDate = moment(el.properties.Datetime).format('MM/D/YYYY')
+                    return sentinelDate==selectedDate})
+                console.log(filtered);
+            }
+        });
+    }
+  })
 
 
 var layerList = new LayerTree({ layers: layers, directoryOptions: directoryOptions, onClickLoad: true });
