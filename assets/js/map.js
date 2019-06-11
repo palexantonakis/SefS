@@ -21,8 +21,6 @@ map.addControl(new mapboxgl.ScaleControl({
     position: 'bottom-right'
 }));
 
-// geolocate control
-//map.addControl(new mapboxgl.GeolocateControl());
 
 //This overides the Bootstrap modal "enforceFocus" to allow user interaction with main map
 $.fn.modal.Constructor.prototype.enforceFocus = function () { };
@@ -65,43 +63,6 @@ $('#clear_general').on('click', function (e) {
 
 });
 
-// Geocoder API
-// Geocoder API
-// Geocoder API
-// var geocoder = new MapboxGeocoder({
-//     accessToken: mapboxgl.accessToken
-// });
-
-// var addressTool = document.getElementById('addressAppend');
-// addressTool.appendChild(geocoder.onAdd(map))
-
-// map.on('load', function () {
-//     map.addSource('geocode-point', {
-//         "type": "geojson",
-//         "data": {
-//             "type": "FeatureCollection",
-//             "features": []
-//         }
-//     });
-
-//     map.addLayer({
-//         "id": "geocode-point",
-//         "source": "geocode-point",
-//         "type": "circle",
-//         "paint": {
-//             "circle-radius": 20,
-//             "circle-color": "dodgerblue",
-//             'circle-opacity': 0.5,
-//             'circle-stroke-color': 'white',
-//             'circle-stroke-width': 3,
-//         }
-//     });
-
-//     geocoder.on('result', function (ev) {
-//         map.getSource('geocode-point').setData(ev.result.geometry);
-//     });
-
-// });
 
 // Coordinates Tool
 // Coordinates Tool
@@ -124,7 +85,6 @@ var emptyGJ = {
 };
 
 map.on('load', function () {
-
     map.addSource('Sentinel', { type: 'geojson', data: emptyGJ });
     map.addLayer({
         "id": "Sentinel",
@@ -142,199 +102,57 @@ map.on('load', function () {
         }
     });
 
-    //monster layers
-    //Mr. Claw layer sources
-    // map.addSource('monster', { type: 'geojson', data: emptyGJ });
-    // map.addSource('mouth', { type: 'geojson', data: emptyGJ });
-    // map.addSource('water-line', { type: 'geojson', data: emptyGJ });
-    // map.addSource('eyes', { type: 'geojson', data: emptyGJ });
+    let selectedDate
+    const picker = datepicker('#datepicker', {alwaysShow: false, maxDate: new Date(2018, 09, 31), minDate: new Date(2018, 09, 1), startDate: new Date(2018, 09, 2),
+        disabledDates:[
+            new Date(2018,09,01), 
+            new Date(2018,09,04), 
+            new Date(2018,09,05), 
+            new Date(2018,09,06), 
+            new Date(2018,09,07),  
+            new Date(2018,09,10),   
+            new Date(2018,09,11), 
+            new Date(2018,09,12), 
+            new Date(2018,09,13), 
+            new Date(2018,09,16), 
+            new Date(2018,09,17), 
+            new Date(2018,09,18), 
+            new Date(2018,09,19), 
+            new Date(2018,09,22), 
+            new Date(2018,09,23), 
+            new Date(2018,09,24), 
+            new Date(2018,09,25), 
+            new Date(2018,09,28), 
+            new Date(2018,09,29), 
+            new Date(2018,09,30), 
+            new Date(2018,09,31),       
+        ],
+        disableYearOverlay: true,
+        onSelect: (instance, date) => {
+            selectedDate = moment(date).format('DD/MM/YYYY')
+            console.log(selectedDate)
+            //map.setPaintProperty('Sentinel', 'circle-stroke-width', 5);
+            console
 
-    // map.addLayer({
-    //     "id": "monster",
-    //     "type": "fill",
-    //     "source": "monster",
-    //     "layout": {
-    //        //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': '#b30000',
-    //         'fill-opacity': 1.0
-    //     }
-    // });
+            if (map.getLayer("Sentinel_dated")) {
+                map.removeLayer("Sentinel_dated");
+            }
+                map.addLayer({
+                    "id": "Sentinel_dated",
+                    "type": "circle",
+                    "source": "Sentinel",
+                    "layout": {},
+                    "paint": {
+                        "circle-color": "black",
+                        "circle-radius": 7
+                    },
+                    "filter": ["==", "sensdates", selectedDate],
+                });
+            
+        }
+    });
 
-    // map.addLayer({
-    //     "id": "mouth",
-    //     "type": "fill",
-    //     "source": "mouth",
-    //     "layout": {
-    //         //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': 'white',
-    //         'fill-opacity': 1.0
-    //     }
-    // });
-
-    // map.addLayer({
-    //     "id": "water-line",
-    //     "type": "line",
-    //     "source": "water-line",
-    //     "layout": {
-    //        // "visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'line-color': '#0099ff',
-    //         'line-opacity': 1.0,
-    //         "line-width": 9,
-    //     },
-    // });
-
-    // map.addLayer({
-    //     "id": "eyes",
-    //     "type": "circle",
-    //     "source": "eyes",
-    //     "layout": {
-    //         //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'circle-color': 'white',
-    //         'circle-opacity': 1.0,
-    //         'circle-stroke-color': 'black',
-    //         'circle-stroke-width': 3,
-    //         'circle-stroke-opacity': 1.0,
-    //     }
-    // });
-
-    //monster layers
-    //Mr. Octo layer sources
-    // map.addSource('octo', { type: 'geojson', data: emptyGJ });
-    // map.addSource('water-line-2', { type: 'geojson', data: emptyGJ });
-    // map.addSource('mouth2', { type: 'geojson', data: emptyGJ });
-    // map.addSource('eyes2', { type: 'geojson', data: emptyGJ });
-
-    // map.addLayer({
-    //     "id": "octo",
-    //     "type": "fill",
-    //     "source": "octo",
-    //     "layout": {
-    //         //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': 'black',
-    //         'fill-opacity': 1.0
-    //     }
-    // });
-
-    // map.addLayer({
-    //     "id": "water-line-2",
-    //     "type": "line",
-    //     "source": "water-line-2",
-    //     "layout": {
-    //         // "visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'line-color': '#0099ff',
-    //         'line-opacity': 1.0,
-    //         "line-width": 9,
-    //     },
-    // });
-    // map.addLayer({
-    //     "id": "mouth2",
-    //     "type": "fill",
-    //     "source": "mouth2",
-    //     "layout": {
-    //         //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': 'white',
-    //         'fill-opacity': 1.0
-    //     }
-    // });
-
-    // map.addLayer({
-    //     "id": "eyes2",
-    //     "type": "circle",
-    //     "source": "eyes2",
-    //     "layout": {
-    //         //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'circle-color': 'red',
-    //         'circle-opacity': 1.0,
-    //         'circle-stroke-color': 'lightblue',
-    //         'circle-stroke-width': 4,
-    //         'circle-stroke-opacity': 1.0,
-    //     }
-    // });
-
-    //cultural layers
-    //cultural layers
-    // map.addSource('country', { type: 'geojson', data: emptyGJ });
-    // map.addLayer({
-    //     "id": "country",
-    //     "type": "fill",
-    //     "source": "country",
-    //     "layout": {
-    //        //"visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': '#595959',
-    //         'fill-opacity': .5,
-    //         'fill-outline-color': '#333333',
-    //     }
-    // });
-
-
-    // map.addSource('populated', { type: 'geojson', data: emptyGJ });
-    // map.addLayer({
-    //     "id": "populated",
-    //     "type": "circle",
-    //     "source": "populated",
-    //     "layout": {
-    //         "visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'circle-color': 'white',
-    //         'circle-opacity': 1.0,
-    //         'circle-stroke-color': '#ff8c1a',
-    //         'circle-stroke-width': 2,
-    //         'circle-stroke-opacity': 1.0,
-    //     }
-    // });
-
-
-    //physical layers
-    //physical layers
-    // map.addSource('ocean', { type: 'geojson', data: emptyGJ });
-    // map.addLayer({
-    //     "id": "ocean",
-    //     "type": "fill",
-    //     "source": "ocean",
-    //     "layout": {
-    //         "visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'fill-color': '#00334d',
-    //         'fill-opacity': 0.5,
-    //         'fill-outline-color': '#00111a',
-    //     }
-    // });
-
-    // map.addSource('river', { type: 'geojson', data: emptyGJ });
-    // map.addLayer({
-    //     "id": "river",
-    //     "type": "line",
-    //     "source": "river",
-    //     "layout": {
-    //         "visibility": 'none'
-    //     },
-    //     "paint": {
-    //         'line-color': '#0099cc',
-    //         'line-opacity': .8,
-    //         "line-width": 4,
-    //     },
-    // });
-
+    
     //Layer Info function
     //Layer Info function
     //Layer Info function
@@ -351,21 +169,6 @@ map.on('load', function () {
         var feature;
         var append = document.getElementById('layer-attribute');
 
-        //Cultural - Layer Info
-        //Cultural - Layer Info
-
-        // if (map.queryRenderedFeatures(e.point, { layers: ['populated'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['populated'] })[0];
-
-        //     append.innerHTML +=
-        //           '<h5>Populated Places</h5>' +
-        //           '<hr>' +
-        //           '<b>City: </b>' + feature.properties.name +
-        //           '<hr>' +
-        //           '<b>Country: </b>' + feature.properties.sov0name +
-        //           '<hr>'
-        // }
 
         if (map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] }).length) {
 
@@ -390,84 +193,13 @@ map.on('load', function () {
                   '<b>Sensor: </b>' + feature.properties.Sensor +
                   '<hr>' +
                   '<b>Polarizati: </b>' + feature.properties.Polarizati +
-                  '<hr>'
+                  '<hr>' +
+                  '<b>Chlorophyll: </b>' + feature.properties.CHL +
+                  '<hr>' +
+                  '<hr>' +
+                  '<b>SST: </b>' + feature.properties.SST +
+                  '<hr>' 
         }
-
-        // if (map.queryRenderedFeatures(e.point, { layers: ['country'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['country'] })[0];
-
-        //     append.innerHTML +=
-        //       '<h5>Country</h5>' +
-        //       '<hr>' +
-        //       '<b>Port Name </b>' + feature.properties.admin +
-        //       '<hr>' +
-        //       '<b>Code: </b>' + feature.properties.adm0_a3 +
-        //       '<hr>'
-        // }
-
-        //Monster - Layer Info
-        //Monster - Layer Info
-        // if (map.queryRenderedFeatures(e.point, { layers: ['monster'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['monster'] })[0];
-
-        //     append.innerHTML +=
-        //           '<h5>Monster Info</h5>' +
-        //           '<hr>' +
-        //           '<b>Name: </b>' + 'Mr. Claw'+
-        //           '<hr>' +
-        //           '<b>Place of Birth: </b>' + 'Atlantic Ocean' +
-        //           '<hr>' +
-        //           '<b>Likes: </b>' + 'Birthday Parties' +
-        //           '<hr>' +
-        //           '<b>Dislikes: </b>' + 'Seafood Festivals' +
-        //           '<hr>'
-        // }
-
-        //Monster - Layer Info
-        //Monster - Layer Info
-        // if (map.queryRenderedFeatures(e.point, { layers: ['octo'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['octo'] })[0];
-
-        //     append.innerHTML +=
-        //           '<h5>Monster Info</h5>' +
-        //           '<hr>' +
-        //           '<b>Name: </b>' + 'Mr. Octo' +
-        //           '<hr>' +
-        //           '<b>Place of Birth: </b>' + 'Pacific Ocean' +
-        //           '<hr>' +
-        //           '<b>Likes: </b>' + 'Big Salads' +
-        //           '<hr>' +
-        //           '<b>Dislikes: </b>' + 'Jules Verne' +
-        //           '<hr>'
-        // }
-
-
-        //Physical - Layer Info
-        //Physical  - Layer Info
-        // if (map.queryRenderedFeatures(e.point, { layers: ['ocean'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['ocean'] })[0];
-
-        //     append.innerHTML +=
-        //           '<h5>Oceans</h5>' +
-        //           '<hr>' +
-        //           '<b>Name: </b>' + feature.properties.name +
-        //           '<hr>'
-        // }
-
-        // if (map.queryRenderedFeatures(e.point, { layers: ['river'] }).length) {
-
-        //     feature = map.queryRenderedFeatures(e.point, { layers: ['river'] })[0];
-
-        //     append.innerHTML +=
-        //           '<h5>Major Rivers</h5>' +
-        //           '<hr>' +
-        //           '<b>Name: </b>' + feature.properties.name +
-        //           '<hr>'
-        // }
     });
 
     //cursor = pointer on hover configuration
@@ -483,28 +215,6 @@ map.on('load', function () {
     //Highlight Features Function
     //Highlight Features Function
     //Highlight Features Function
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["populated"] });
-
-    //     if (map.getLayer("populated_hl")) {
-    //         map.removeLayer("populated_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "populated_hl",
-    //             "type": "circle",
-    //             "source": "populated",
-    //             "layout": {},
-    //             "paint": {
-    //                 "circle-color": "cyan",
-    //                 "circle-radius": 7
-    //             },
-    //             "filter": ["==", "name", features[0].properties.name],
-    //         });
-    //     }
-    // });
 
     map.on(touchEvent, function (e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ["Sentinel"] });
@@ -528,124 +238,6 @@ map.on('load', function () {
             });
         }
     });
- 
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["country"] });
-
-    //     if (map.getLayer("country_hl")) {
-    //         map.removeLayer("country_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "country_hl",
-    //             "type": "line",
-    //             "source": "country",
-    //             "layout": {},
-    //             "paint": {
-    //                 "line-color": "cyan",
-    //                 "line-width": 3
-    //             },
-    //             "filter": ["==", "sovereignt", features[0].properties.sovereignt],
-    //         });
-    //     }
-    // });
-
-    //Highlight - Mr. Claw
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["monster"] });
-
-    //     if (map.getLayer("monster_hl")) {
-    //         map.removeLayer("monster_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "monster_hl",
-    //             "type": "line",
-    //             "source": "monster",
-    //             "layout": {},
-    //             "paint": {
-    //                 "line-color": "cyan",
-    //                 "line-width": 3
-    //             },
-    //             "filter": ["==", "Id", features[0].properties.Id],
-    //         });
-    //     }
-    // });
-
-    //Highlight - Mr. Octo
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["octo"] });
-
-    //     if (map.getLayer("octo_hl")) {
-    //         map.removeLayer("octo_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "octo_hl",
-    //             "type": "line",
-    //             "source": "octo",
-    //             "layout": {},
-    //             "paint": {
-    //                 "line-color": "cyan",
-    //                 "line-width": 3
-    //             },
-    //             "filter": ["==", "Id", features[0].properties.Id],
-    //         });
-    //     }
-    // });
-
-    //Highlight - Physical
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["river"] });
-
-    //     if (map.getLayer("river_hl")) {
-    //         map.removeLayer("river_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "river_hl",
-    //             "type": "line",
-    //             "source": "river",
-    //             "layout": {},
-    //             "paint": {
-    //                 "line-color": "cyan",
-    //                 "line-width": 4
-    //             },
-    //             "filter": ["==", "name", features[0].properties.name],
-    //         });
-    //     }
-    // });
-
-    // map.on(touchEvent, function (e) {
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ["ocean"] });
-
-    //     if (map.getLayer("ocean_hl")) {
-    //         map.removeLayer("ocean_hl");
-    //     }
-
-    //     if (features.length) {
-
-    //         map.addLayer({
-    //             "id": "ocean_hl",
-    //             "type": "line",
-    //             "source": "ocean",
-    //             "layout": {},
-    //             "paint": {
-    //                 "line-color": "cyan",
-    //                 "line-width": 3
-    //             },
-    //             "filter": ["==", "name", features[0].properties.name],
-    //         });
-    //     }
-    // });
 });
 
 // Directory Options
@@ -653,18 +245,6 @@ map.on('load', function () {
 // Directory Options - open or closed by defualt (true/false)
 var directoryOptions =
 [
-    // {
-    //     'name': 'Monsters',
-    //     'open': true
-    // },
-    // {
-    //     'name': 'Cultural',
-    //     'open': true
-    // },
-    // {
-    //     'name': 'Physical',
-    //     'open': true
-    // },
     {
         'name': 'Ship Detections',
         'open': true   //defines only if the folder will be initialy open on load and not if the layer is loaded
@@ -680,168 +260,10 @@ var layers =
         'name': 'Sentinel',
         'id': 'Sentinel',
         'source': "Sentinel",
-        'path': 'assets/json/detections.json',
+        'path': 'assets/json/sentineldetections.json',
         'directory': 'Ship Detections',
     },
-    // // Mr Claw LAYER TREE CONFIG
-    // // Mr Claw LAYER TREE CONFIG
-    // {
-    //     'name': 'Mr Claw',
-    //     'id': 'monster_group',
-    //     'hideLabel': ['mouth', 'water-line', 'eyes', 'monster'],
-    //     'icon': 'assets/images/layer-stack-15.svg',
-    //     'layerGroup': [
-    //         {
-    //             'id': 'monster',
-    //             'source': 'monster',
-    //             'name': 'Mr. Claw',
-    //             'path': 'assets/json/monster.json',
-    //         },
-    //         {
-    //             'id': 'mouth',
-    //             'source': 'mouth',
-    //             'name': 'Mouth',
-    //             'path': 'assets/json/mouth.json',
-    //         },
-    //         {
-    //             'id': 'water-line',
-    //             'source': 'water-line',
-    //             'name': 'Water',
-    //             'path': 'assets/json/water.json',
-    //         },
-    //         {
-    //             'id': 'eyes',
-    //             'source': 'eyes',
-    //             'name': 'Eyes',
-    //             'path': 'assets/json/eyes.json',
-    //         },
-
-    //     ],
-    //     'directory': 'Monsters'
-    // },
-
-    // // Mr Octo LAYER TREE CONFIG
-    // // Mr Octo LAYER TREE CONFIG
-    // {
-    //     'name': 'Mr. Octo',
-    //     'id': 'monster_group_2',
-    //     'hideLabel': ['octo', 'water-line-2', 'eyes2', 'mouth2'],
-    //     'icon': 'assets/images/layer-stack-15.svg',
-    //     'layerGroup': [
-    //         {
-    //             'id': 'octo',
-    //             'source': 'octo',
-    //             'name': 'Mr. Octo',
-    //             'path': 'assets/json/octo.json',
-    //         },
-    //         {
-    //             'id': 'water-line-2',
-    //             'source': 'water-line-2',
-    //             'name': 'Water',
-    //             'path': 'assets/json/water2.json',
-    //         },
-    //         {
-    //             'id': 'mouth2',
-    //             'source': 'mouth2',
-    //             'name': 'Mouth',
-    //             'path': 'assets/json/mouth2.json',
-    //         },
-    //         {
-    //             'id': 'eyes2',
-    //             'source': 'eyes2',
-    //             'name': 'Eyes',
-    //             'path': 'assets/json/eyes2.json',
-    //         },
-    //     ],
-    //     'directory': 'Monsters'
-    // },
-
-     // Cultural LAYER TREE CONFIG
-     // Cultural LAYER TREE CONFIG
-
-    // {
-    //     'name': 'Populated Places',
-    //     'id': 'populated',
-    //     'source': "populated",
-    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson',
-    //     'directory': 'Cultural',
-    // }
-    // {
-    //     'name': 'Countries',
-    //     'id': 'country',
-    //     'source': 'country',
-    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_map_units.geojson',
-    //     'directory': 'Cultural',
-    // },
-
-
-    // Physical LAYER TREE CONFIG
-    // Physical LAYER TREE CONFIG
-
-    // {
-    //     'name': 'Major Rivers',
-    //     'id': 'river',
-    //     'source': 'river',
-    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_rivers_lake_centerlines.geojson',
-    //     'directory': 'Physical',
-    // },
-    // {
-    //     'name': 'Oceans',
-    //     'id': 'ocean',
-    //     'source': 'ocean',
-    //     'path': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_geography_marine_polys.geojson',
-    //     'directory': 'Physical',
-    // },
-
 ];
-
-// map.on('load', function (e) {
-//     var feature = map.querySourceFeatures("Sentinel");
-//     console.log(feature);
-// });   save for another try
-let selectedDate
-let sentinelDate
-const picker = datepicker('#datepicker', {alwaysShow: false, maxDate: new Date(2018, 09, 31), minDate: new Date(2018, 09, 1), startDate: new Date(2018, 09, 2),
-    disabledDates:[
-        new Date(2018,09,01), 
-        new Date(2018,09,04), 
-        new Date(2018,09,05), 
-        new Date(2018,09,06), 
-        new Date(2018,09,07),  
-        new Date(2018,09,10),   
-        new Date(2018,09,11), 
-        new Date(2018,09,12), 
-        new Date(2018,09,13), 
-        new Date(2018,09,16), 
-        new Date(2018,09,17), 
-        new Date(2018,09,18), 
-        new Date(2018,09,19), 
-        new Date(2018,09,22), 
-        new Date(2018,09,23), 
-        new Date(2018,09,24), 
-        new Date(2018,09,25), 
-        new Date(2018,09,28), 
-        new Date(2018,09,29), 
-        new Date(2018,09,30), 
-        new Date(2018,09,31),       
-    ],
-    disableYearOverlay: true,
-    onSelect: (instance, date) => {
-        selectedDate = moment(date).format('MM/D/YYYY')
-        console.log(selectedDate)
-        map.on("sourcedata", function(e) {
-            if (map.getSource('Sentinel') && map.isSourceLoaded('Sentinel')) {
-            //    console.log('source loaded!');
-                var features = map.querySourceFeatures('Sentinel') 
-                var filtered = features.filter(function(el){
-                    sentinelDate = moment(el.properties.Datetime).format('MM/D/YYYY')
-                    return sentinelDate==selectedDate})
-                console.log(filtered);
-            }
-        });
-    }
-  })
-
 
 var layerList = new LayerTree({ layers: layers, directoryOptions: directoryOptions, onClickLoad: true });
 
