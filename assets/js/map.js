@@ -260,7 +260,7 @@ var layers =
         'name': 'Sentinel',
         'id': 'Sentinel',
         'source': "Sentinel",
-        'path': 'assets/json/sentineldetections.json',
+        'path': 'assets/json/detections.json',
         'directory': 'Ship Detections',
     },
 ];
