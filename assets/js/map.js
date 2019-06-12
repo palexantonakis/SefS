@@ -103,6 +103,7 @@ map.on('load', function () {
     });
 
     let selectedDate
+    let currentDate
     const picker = datepicker('#datepicker', {alwaysShow: false, maxDate: new Date(2018, 09, 31), minDate: new Date(2018, 09, 1), startDate: new Date(2018, 09, 2),
         disabledDates:[
             new Date(2018,09,01), 
@@ -130,25 +131,30 @@ map.on('load', function () {
         disableYearOverlay: true,
         onSelect: (instance, date) => {
             selectedDate = moment(date).format('DD/MM/YYYY')
-            console.log(selectedDate)
-            //map.setPaintProperty('Sentinel', 'circle-stroke-width', 5);
-            console
+            currentDate = moment().format('DD/MM/YYYY')
 
             if (map.getLayer("Sentinel_dated")) {
                 map.removeLayer("Sentinel_dated");
             }
+            if (selectedDate === currentDate){
+                 map.setPaintProperty('Sentinel', 'circle-opacity', 1.0);
+                 map.setPaintProperty('Sentinel', 'circle-stroke-opacity', 1.0);
+            }else{
+                map.setPaintProperty('Sentinel', 'circle-opacity', 0.2);
+                map.setPaintProperty('Sentinel', 'circle-stroke-opacity', 0.2);
+            }
+
                 map.addLayer({
                     "id": "Sentinel_dated",
                     "type": "circle",
                     "source": "Sentinel",
                     "layout": {},
                     "paint": {
-                        "circle-color": "black",
+                        "circle-color": "blue",
                         "circle-radius": 7
                     },
                     "filter": ["==", "sensdates", selectedDate],
-                });
-            
+                });    
         }
     });
 
@@ -168,11 +174,17 @@ map.on('load', function () {
         var popup = new mapboxgl.Popup();
         var feature;
         var append = document.getElementById('layer-attribute');
-
+      
 
         if (map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] }).length) {
 
             feature = map.queryRenderedFeatures(e.point, { layers: ['Sentinel'] })[0];
+            popup.setHTML(`<p style="font-size:14px;">
+            A vessel with ${feature.properties.Width}m width and ${feature.properties.Length}m length. 
+            For more info press the <span style="color:blue">"i"</span> button, on the left tab.
+            </p>`)
+            .setLngLat([feature.properties.Longitude,feature.properties.Latitude])
+            .addTo(map)
 
             append.innerHTML +=
                   '<h5>Info</h5>' +
@@ -257,11 +269,11 @@ var layers =
 
 [
     {
-        'name': 'Sentinel',
+        'name': 'Vessels',
         'id': 'Sentinel',
         'source': "Sentinel",
         'path': 'assets/json/detections.json',
-        'directory': 'Ship Detections',
+        'directory': 'Ship Detections of October 2018',
     },
 ];
 
